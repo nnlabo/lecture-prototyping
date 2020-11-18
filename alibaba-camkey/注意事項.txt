@@ -1,0 +1,11 @@
+2019年の実施時、ライブラリのインストールに時間がかかり、
+Snowboyの動作確認までしかできなかった。
+
+pyaudioの依存関係の解決に時間がかかった
+⇒sudo apt-get install portaudio19-dev
+
+awscliのインストールでもエラー出ていた（timeout?）
+発明クラブの通信速度が遅い…。
+
+cv2が足りないといわれた
+⇒　https://qiita.com/fiftystorm36/items/1a285b5fbf99f8ac82eb

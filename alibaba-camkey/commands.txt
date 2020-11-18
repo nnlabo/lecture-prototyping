@@ -1,0 +1,37 @@
+
+AD2後期　第八回コマンドリスト
+
+---Snowboy（音声の人工知能）の設定---
+sudo apt-get update
+sudo apt-get install swig3.0 python-pyaudio python3-pyaudio sox
+sudo apt-get install portaudio19-dev
+pip install pyaudio
+sudo apt-get install libatlas-base-dev 
+
+---Snowboyの動作確認---
+cd /home/pi/snowboy/
+rec 1.wav
+play 1.wav 
+python demo.py resources/snowboy.umdl 
+
+---Snowboyで写真を撮ってみる---
+python snowcam.py resources/snowboy.umdl
+
+---AWSをラズパイから使うためのソフトをインストールする---
+pip install awscli
+sudo pip install boto3
+
+---AWSをラズパイから使うための初期設定を行う---
+aws configure
+
+---AWSに実験用スペースを作る---
+aws s3 mb s3://hatsumei2019
+
+---AWS Rekognition（画像の人工知能）に顔リストを作る---
+python createCollection.py 
+
+---AWS Rekognition（画像の人工知能）に顔を覚えさせる---
+python regPhoto.py 1.jpg 
+
+---Snowboy+AWS Rekognitionでサーボを動かす---
+python snowcam_auth_servo.py resources/snowboy.umdl 
