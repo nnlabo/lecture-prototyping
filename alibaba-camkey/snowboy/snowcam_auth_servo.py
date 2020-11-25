@@ -11,7 +11,7 @@ import RPi.GPIO as GPIO
 
 
 # for AWS configuration
-bucket='hatsumei2019'
+bucket='alibabacam'
 collectionId='Family'
 fileName='input.jpg'
 threshold = 70
@@ -20,7 +20,7 @@ interrupted = False
 open_pose=3.5
 close_pose=8.0
 
-d = {'31bde984-d84c-4ba1-8ab6-a61654dcb4a9': 'Watashi'}
+d = {'2d309ee4-510c-497a-89d2-c7179f8322e3': 'Tsuchinaga'}
 
 #Stting for Servo
 GPIO.setmode(GPIO.BCM)

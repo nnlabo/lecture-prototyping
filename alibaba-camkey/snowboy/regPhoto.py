@@ -3,7 +3,7 @@ import sys
 import boto3
 
 # for AWS configuration
-bucket='hatsumei2019'
+bucket='alibabacam'
 collectionId='Family'
 
 # Receive filename from Console

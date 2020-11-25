@@ -38,6 +38,7 @@ print('Listening... Press Ctrl+C to exit')
 #camera = takephoto()
 
 # main loop
+#takephoto()
 detector.start(detected_callback=takephoto,
                interrupt_check=interrupt_callback,
                sleep_time=0.03)
