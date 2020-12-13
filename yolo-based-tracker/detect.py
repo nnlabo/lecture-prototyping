@@ -19,7 +19,7 @@ GPIO.setup(18, GPIO.OUT)
 p = GPIO.PWM(18, 50)
 p.start(0.0)
 p.ChangeDutyCycle(zero_pose)
-time.sleep(0.5)
+time.sleep(1.0)
 
 
 def main(mode, tiny, iou_threshold, confidence_threshold, path):
@@ -97,13 +97,13 @@ def main(mode, tiny, iou_threshold, confidence_threshold, path):
               frame_center_xy = (int(frame_size[0]/2), int(frame_size[1]/2))
               # cv2.circle(frame, frame_center_xy, 5, (0,0,255), -1)
               dx = frame_center_xy[0] - object_center_xy[0]
-              input_x = input_x - 0.05 * dx
+              input_x = input_x + 0.0015 * dx
               if input_x > 12.0:
                 input_x = 12.0
               elif input_x < 2.5:
                 input_x = 2.5
               p.ChangeDutyCycle(input_x)
-              time.sleep(0.5)
+              time.sleep(0.3)
         if cv2.waitKey(1) & 0xFF == ord('q'):
           break
       cap.release()
