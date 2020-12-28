@@ -22,7 +22,7 @@ def on_message(client, userdata, msg):
     print(remoteSoundCommandjson['message'])
     remoteSoundCommand=remoteSoundCommandjson['message']
 
-    subprocess.call("aplay -D plughw:Headphones,0 "+remoteSoundCommand, shell=True)
+    subprocess.call("aplay -D plughw:b1,0 "+remoteSoundCommand, shell=True)
 
 if __name__ == '__main__':
     client = paho.mqtt.client.Client()
