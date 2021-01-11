@@ -5,7 +5,7 @@ import numpy as np
 
 PROFILE = 'default'
 REGION = 'us-east-1'
-MODEL_ARN = 'arn:aws:rekognition:us-east-1:994958086421:project/Gundam_unicorn_barbados/version/Gundam_unicorn_barbados.2020-12-28T01.34.15/1609086854919'
+MODEL_ARN = 'arn:aws:rekognition:us-east-1:994958086421:project/Gundam_unicorn_barbados/version/Gundam_unicorn_barbados.2020-12-28T01.45.21/1609087521764'
 
 CLASSES = ['Barbados','Unicorn']
 
