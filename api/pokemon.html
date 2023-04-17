@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pokeapi_sample</title>
+  </head>
+  <body>
+    <div>
+      <p>番号を入力(1〜1008)</p>
+      <input type="text" value="1" />
+      <button>Get</button>
+    </div>
+
+    <div>
+      <p id="pokemonName"></p>
+      <img src="" alt="" />
+    </div>
+
+    <script>
+      const url = "https://pokeapi.co/api/v2/pokemon/";
+
+      const nameLabel = document.getElementById("pokemonName");
+      const img = document.getElementsByTagName("img")[0];
+      const btn = document.getElementsByTagName("button")[0];
+
+      btn.addEventListener("click", () => {
+        let pokemonNumber = document.getElementsByTagName("input")[0].value;
+        fetch(url + pokemonNumber)
+          .then((res) => res.json())
+          .then((jsonData) => {
+            nameLabel.innerText = jsonData.name;
+            img.src = jsonData.sprites.front_default;
+          });
+      });
+    </script>
+  </body>
+</html>
