@@ -1,24 +1,32 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import scrolledtext
 
 import os
-from turtle import heading
-import openai
+from openai import OpenAI
+
 
 # APIキーの設定
-openai.api_key = os.getenv("OPEN_API_KEY")
+api_key = os.getenv("OPEN_API_KEY")
+client = OpenAI(api_key=api_key)
+
 
 # APIをコールする
 def callOpenApi(content):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
         messages=[
-        {"role": "user", "content": content},
-        ],
+            {
+                "role": "user",
+                "content": content
+            }
+        ]
     )
-    return response
-    
+
+    result = completion.choices[0].message.content
+    # print(result)
+    return result
+
+
 # テキストボックスに入力された質問を投げる
 def throwQuestion():
     content = text.get()
@@ -28,7 +36,7 @@ def throwQuestion():
         return
     print(content, "を質問します")
     response = callOpenApi(content)
-    print(response.choices[0]["message"]["content"].strip())
+    print(response)
     
 
 # メインウィンドウ
