@@ -28,7 +28,7 @@
     </div>
     <script>
       const url = "https://pokeapi.co/api/v2/pokemon/";
-
+      
       // Getボタンをクリックした時の処理
       const nameLabel = document.getElementById("pokemonName");
       const img = document.getElementsByTagName("img")[0];
@@ -36,20 +36,42 @@
       getBtn.addEventListener("click", () => {
         let pokemonNumber = document.getElementsByTagName("input")[0].value;
         fetch(url + pokemonNumber)
-          .then((res) => res.json())
-          .then((jsonData) => {
-            nameLabel.innerText = jsonData.name;
-            // Option①: 他の属性を指定して違う画像を表示してみる
-            img.src = jsonData.sprites.front_default;
-          });
+        .then((res) => res.json())
+        .then((jsonData) => {
+          nameLabel.innerText = jsonData.name;
+          // Option①: 他の属性を指定して違う画像を表示してみる
+          img.src = jsonData.sprites.front_default;
+        });
       });
+      
+      const API_KEY = "";  // APIキーは流出しないように注意してください *ここに記述したままにしないなど。
+      const MODEL_NAME = "gemini-2.5-flash-lite";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent`;
+      
+      // AIにテキスト生成してもらう関数
+      async function generateText(promptText) {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": `${API_KEY}`
+          },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: promptText }] }],
+          }),
+        });
 
+        const data = await response.json();
+        console.log(data.candidates[0].content.parts[0].text);
+        return data.candidates[0].content.parts[0].text;
+      }
       // 生成ボタンをクリックしたときの処理
       const textArea = document.getElementsByTagName("textarea")[0];
       const generateBtn = document.getElementById("generatebutton");
-      generateBtn.addEventListener("click", () => {
+      generateBtn.addEventListener("click", async() => {
         // Option②: AIにポケモンの説明を生成してもらい、textareaに表示してみる
-        textArea.innerText = "ポケモン。それは不思議な生き物。ポケットモンスター。縮めて、ポケモン"
+        textArea.innerText = "ポケモン。それは不思議な生き物。ポケットモンスター。縮めて、ポケモン. (定型文です)";
+        // textArea.innerText = await generateText(`${nameLabel.innerText}というポケモンの説明を100字以内で生成してください。`);
       });
     </script>
   </body>
